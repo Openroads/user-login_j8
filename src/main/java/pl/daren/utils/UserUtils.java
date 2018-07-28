@@ -3,6 +3,8 @@ package pl.daren.utils;
 import org.apache.commons.lang3.RandomStringUtils;
 import pl.daren.api.model.User;
 
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,7 +20,7 @@ public class UserUtils {
     private static String specialCharacters = "~`!@#$%^&*()-_=+[{]}\\\\|;:\\'\\\",<.>/?";
     public static char[] charactersSpecial = specialCharacters.toCharArray();
 
-    private static String passwordRegex = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?["+specialCharacters+"]).{8,}$";
+    private static String passwordRegex = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[" + specialCharacters + "]).{8,}$";
 
 
     public static boolean isValid(User user) {
@@ -38,11 +40,18 @@ public class UserUtils {
     }
 
     private static boolean checkPhone(String phone) {
-        return isNumeric(phone);
+        return isNumeric(phone) && phone.length() > 8;
     }
 
-    private static boolean checkEmail(String email) {
+    public static boolean checkEmail(String email) {
         if (isNull(email)) return false;
+        try {
+            InternetAddress address = new InternetAddress(email);
+            address.validate();
+        } catch (AddressException e) {
+            return false;
+        }
+
         return true;
     }
 
@@ -51,7 +60,8 @@ public class UserUtils {
         Pattern pattern = Pattern.compile(passwordRegex);
         Matcher matcher = pattern.matcher(password);
 
-        return  matcher.matches();    }
+        return matcher.matches();
+    }
 
     public static String generateRandomPassword() {
         StringBuilder randomPassword = new StringBuilder("R");

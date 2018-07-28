@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public class UserDAOImplMock implements UserDAO {
 
-    private static Map<String, User> users = new HashMap<String, User>();
+    private static Map<String, User> users = new HashMap<>();
 
     static {
         users.put("John", User.of("John", "jdoe@gmail.com", "Jdoe123#", "555666777"));
@@ -30,7 +30,8 @@ public class UserDAOImplMock implements UserDAO {
     }
 
     public boolean changeUser(User user) {
-        Optional<User> user1 = Optional.ofNullable(user).filter(u -> users.containsKey(u.getName()));
+        Optional<User> user1 = Optional.ofNullable(user)
+                .filter(u -> users.containsKey(u.getName()));
         if (user1.isPresent()) {
             users.put(user.getName(), user);
             return true;
