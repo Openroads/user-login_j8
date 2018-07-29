@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
                 if (!userDAO.getUser(user.getName()).isPresent()) {
                     Optional<User> us = userDAO.createUser(user);
                     if (us.isPresent()) {
-                       throwUserAlreadyExist();
+                        throwUserAlreadyExist();
                     }
                     return user;
                 } else {
@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-    private UserAlreadyExist throwUserAlreadyExist() throws UserAlreadyExist {
+    private void throwUserAlreadyExist() throws UserAlreadyExist {
         throw new UserAlreadyExist("User with provided user name already exist");
     }
 

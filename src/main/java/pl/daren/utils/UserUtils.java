@@ -17,11 +17,10 @@ public class UserUtils {
     public static char[] charactersUppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
     public static char[] charactersLowercase = "abcdefghijklmnopqrstuvwxyz".toCharArray();
     public static char[] charactersNumeric = "0123456789".toCharArray();
-    private static String specialCharacters = "~`!@#$%^&*()-_=+[{]}\\\\|;:\\'\\\",<.>/?";
+    private static String specialCharacters = "#?!@$%^&*-";
     public static char[] charactersSpecial = specialCharacters.toCharArray();
 
     private static String passwordRegex = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[" + specialCharacters + "]).{8,}$";
-
 
     public static boolean isValid(User user) {
         if (isNull(user)) return false;
@@ -60,7 +59,7 @@ public class UserUtils {
         Pattern pattern = Pattern.compile(passwordRegex);
         Matcher matcher = pattern.matcher(password);
 
-        return matcher.matches();
+       return matcher.matches();
     }
 
     public static String generateRandomPassword() {

@@ -20,11 +20,9 @@ public class UserServiceRegisterUserTest {
 
     @Mock
     UserDAO userDAO;
-
-
     UserService userService;
 
-    private static final User testUser = User.of("Johny", "jbrawo@gmail.com", "AAaa12390]]", "555666333");
+    private static final User testUser = User.of("Johny", "jbravo@gmail.com", "AAaa12390##", "555666333");
 
     @Before
     public void setUp() {
