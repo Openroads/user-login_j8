@@ -79,4 +79,21 @@ public class UserUtilsTest {
         assertFalse(UserUtils.isValid(correctUser));
 
     }
+
+    @Test
+    public void generateRandomPassword() {
+
+        correctUser.setPassword(UserUtils.generateRandomPassword());
+        assertTrue(UserUtils.isValid(correctUser));
+
+        correctUser.setPassword(UserUtils.generateRandomPassword());
+        assertTrue(UserUtils.isValid(correctUser));
+
+        correctUser.setPassword(UserUtils.generateRandomPassword());
+        assertTrue(UserUtils.isValid(correctUser));
+
+        correctUser.setPassword(UserUtils.generateRandomPassword());
+        assertTrue(UserUtils.isValid(correctUser));
+
+    }
 }
